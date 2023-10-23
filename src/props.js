@@ -3,6 +3,7 @@ import "./App.css";
 //Hướng dẫn sử dụng props
 //Mục đích của prop là truyền tham số vào component
 
+//API
 const exams = [
   {
     title: "Tiêu đề 1",
@@ -19,13 +20,14 @@ const exams = [
     count: 200,
   },
 ];
-function PostItem({ title, thumbnail, description, count }) {
+
+function PostItem({ exam }) {
   return (
     <div className="post-item">
-      <h2 className="post-title">{title}</h2>
-      <img src={thumbnail} alt={title} />
-      <p className="post-desc">{description}</p>
-      <p className="post-published">Số lượng tham gia: {count}</p>
+      <h2 className="post-title">{exam.title}</h2>
+      <img src={exam.thumbnail} alt={exam.title} />
+      <p className="post-desc">{exam.description}</p>
+      <p className="post-published">Số lượng tham gia: {exam.count}</p>
     </div>
   );
 }
@@ -33,17 +35,9 @@ function PostItem({ title, thumbnail, description, count }) {
 function App() {
   return (
     <div id="wrapper">
-      {exams.map((exam, index) => {
-        return (
-          <PostItem
-            key={index}
-            title={exam.title}
-            thumbnail={exam.thumbnail}
-            description={exam.description}
-            count={exam.count}
-          />
-        );
-      })}
+      {exams.map((exam, index) => (
+        <PostItem key={index} exam={exam} />
+      ))}
     </div>
   );
 }
